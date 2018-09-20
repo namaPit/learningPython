@@ -33,14 +33,10 @@ n_room = 10     # 1フロアの部屋の数
 n_floor = 3     # 1棟ごとの階数
 n_blds = 4      # 棟の数
 cnt1 = 0           # 配列作成時のカウンタ
+ary = []        # 配列を作成
 
-
-while True:
-    ary[cnt1] = [[0] * n_room for i in range(n_floor)]
-    cnt1+=1
-    if cnt1 == n_blds:
-        break
-    
+# 配列を0で埋めた状態で作成
+ary = [[[0]*n_room for i in range (0,n_floor)] for k in range (0,n_blds)]
 
 n = int(input())    # データ数を取得
 cnt2 = 0            # データ取得用カウンタの初期化
@@ -52,7 +48,35 @@ while True:
     if cnt2 == n:
         break
     
+x = 0
+
+for i in range(n_blds):
+    if x != 0:
+        print("#"*20)
+    x += 1
+
+    for a in range(3):
+        for b in range(10):
+            print(" %d"%(ary[i][a][b]),end = "")
+        print()
+
+
 
 cnt_b = 0       # 棟を回すためのカウンタ
 cnt_f = 0       # 階を回すためのカウンタ
+
+while True:
+    
+    while cnt_f < n_floor:  # 各階ごとのデータをスペースでjoinして出力していく
+        print(" ".join(ary[cnt_b][cnt_f]))
+        cnt_f += 1
+    
+    cnt_f = 0       # 階数カウンタを初期化
+    cnt_b += 1      # 棟数カウンタを増やす
+
+    if cnt_b >= n_blds:     # 棟数カウンタが棟数と>=ならbreak
+        break
+    
+    # 次の棟があるときだけセパレータを出力
+    print("####################")
 
